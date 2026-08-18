@@ -1,0 +1,349 @@
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+
+        <div>
+            <h1>FinTrace</h1>
+            <span>Financial Network Investigation</span>
+        </div>
+
+        <div class="search">
+
+            <input [(ngModel)]="accountId" placeholder="Enter account ID" (keyup.enter)="search()" />
+
+            <button (click)="search()" [disabled]="loading">
+                {{ loading ? 'Investigating...' : 'Investigate' }}
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Error -->
+    @if (error) {
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    }
+
+
+    <!-- Loading -->
+    @if (loading) {
+
+    <div class="loading">
+        Investigating account {{ accountId }}...
+    </div>
+
+    }
+
+
+    @if (investigation && !loading) {
+
+    <!-- Risk summary -->
+    <div class="summary">
+
+        <div class="card">
+            <span>Account</span>
+            <strong>{{ investigation.accountId }}</strong>
+        </div>
+
+        <div class="card">
+            <span>Risk Score</span>
+            <strong>
+                {{ investigation.riskScore }}
+            </strong>
+        </div>
+
+        <div class="card risk-card" [class.critical]="investigation.riskLevel === 'CRITICAL'">
+            <span>Risk Level</span>
+            <strong>
+                {{ investigation.riskLevel }}
+            </strong>
+        </div>
+
+        <div class="card">
+            <span>Connected Accounts</span>
+            <strong>
+                {{ investigation.connectedAccounts.length }}
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- Main content -->
+    <div class="content">
+
+        <!-- Left -->
+        <div class="panel">
+
+            <h2>Investigation Reasons</h2>
+
+            @if (investigation.reasons.length > 0) {
+
+            <div class="reasons">
+
+                @for (
+                reason of investigation.reasons;
+                track reason
+                ) {
+
+                <div class="reason">
+                    <span>✓</span>
+                    {{ reason }}
+                </div>
+
+                }
+
+            </div>
+
+            } @else {
+
+            <div class="empty">
+                No suspicious indicators found.
+            </div>
+
+            }
+
+
+            <h2>Connected Accounts</h2>
+
+            <div class="accounts">
+
+                @for (
+                account of investigation.connectedAccounts;
+                track account
+                ) {
+
+                <span class="account-chip">
+                    {{ account }}
+                </span>
+
+                }
+
+            </div>
+
+
+            <h2>High-Risk Merchants</h2>
+
+            @for (
+            merchant of investigation.highRiskMerchants;
+            track merchant
+            ) {
+
+            <div class="merchant">
+                🔴 {{ merchant }}
+            </div>
+
+            }
+
+        </div>
+
+
+        <!-- Graph -->
+        <div class="panel graph-panel">
+
+            <div class="graph-header">
+                <h2>Network Graph</h2>
+
+                <span>
+                    {{ graphData?.nodes?.length || 0 }}
+                    nodes
+                </span>
+            </div>
+
+            <div #graphContainer class="graph-container"></div>
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+
+        <div>
+            <h1>FinTrace</h1>
+            <span>Financial Network Investigation</span>
+        </div>
+
+        <div class="search">
+
+            <input [(ngModel)]="accountId" placeholder="Enter account ID" (keyup.enter)="search()" />
+
+            <button (click)="search()" [disabled]="loading">
+                {{ loading ? 'Investigating...' : 'Investigate' }}
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Error -->
+    @if (error) {
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    }
+
+
+    <!-- Loading -->
+    @if (loading) {
+
+    <div class="loading">
+        Investigating account {{ accountId }}...
+    </div>
+
+    }
+
+
+    @if (investigation && !loading) {
+
+    <!-- Risk summary -->
+    <div class="summary">
+
+        <div class="card">
+            <span>Account</span>
+            <strong>{{ investigation.accountId }}</strong>
+        </div>
+
+        <div class="card">
+            <span>Risk Score</span>
+            <strong>
+                {{ investigation.riskScore }}
+            </strong>
+        </div>
+
+        <div class="card risk-card" [class.critical]="investigation.riskLevel === 'CRITICAL'">
+            <span>Risk Level</span>
+            <strong>
+                {{ investigation.riskLevel }}
+            </strong>
+        </div>
+
+        <div class="card">
+            <span>Connected Accounts</span>
+            <strong>
+                {{ investigation.connectedAccounts.length }}
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- Main content -->
+    <div class="content">
+
+        <!-- Left -->
+        <div class="panel">
+
+            <h2>Investigation Reasons</h2>
+
+            @if (investigation.reasons.length > 0) {
+
+            <div class="reasons">
+
+                @for (
+                reason of investigation.reasons;
+                track reason
+                ) {
+
+                <div class="reason">
+                    <span>✓</span>
+                    {{ reason }}
+                </div>
+
+                }
+
+            </div>
+
+            } @else {
+
+            <div class="empty">
+                No suspicious indicators found.
+            </div>
+
+            }
+
+
+            <h2>Connected Accounts</h2>
+
+            <div class="accounts">
+
+                @for (
+                account of investigation.connectedAccounts;
+                track account
+                ) {
+
+                <span class="account-chip">
+                    {{ account }}
+                </span>
+
+                }
+
+            </div>
+
+
+            <h2>High-Risk Merchants</h2>
+
+            @for (
+            merchant of investigation.highRiskMerchants;
+            track merchant
+            ) {
+
+            <div class="merchant">
+                🔴 {{ merchant }}
+            </div>
+
+            }
+
+        </div>
+
+
+        <!-- Graph -->
+        <div class="panel graph-panel">
+
+            <div class="graph-header">
+                <h2>Network Graph</h2>
+
+                <div class="graph-header-right">
+                    <span>
+                        {{ graphData?.nodes?.length || 0 }}
+                        nodes
+                    </span>
+
+                    <button type="button" class="fit-btn" (click)="fitToView()">
+                        Fit to view
+                    </button>
+                </div>
+            </div>
+
+            <div class="legend">
+                <span class="legend-item"><i class="dot dot-selected"></i>Selected account</span>
+                <span class="legend-item"><i class="dot dot-account"></i>Account</span>
+                <span class="legend-item"><i class="dot dot-merchant"></i>Merchant (low risk)</span>
+                <span class="legend-item"><i class="dot dot-medium-risk"></i>Medium risk</span>
+                <span class="legend-item"><i class="dot dot-high-risk"></i>High risk</span>
+                <span class="legend-item"><i class="dot dot-device"></i>Device</span>
+                <span class="legend-item"><i class="dot dot-ip"></i>IP address</span>
+            </div>
+
+            <div #graphContainer class="graph-container"></div>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>
+        </div>
+
+    </div>
+
+    }
+
+</div>
