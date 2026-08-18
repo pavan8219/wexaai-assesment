@@ -7,7 +7,6 @@ FinTrace is a graph-powered financial fraud investigation platform built to iden
 The application uses **CognoDB Cloud** as the graph database and exposes the investigation capabilities through a Spring Boot REST API and an Angular web application.
 
 **Live Demo:** https://fintrace-wexa.netlify.app/investigation  
-**Backend API:** https://fintrace-backend-g1tu.onrender.com
 
 ---
 
