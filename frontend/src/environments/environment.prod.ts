@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://YOUR-RENDER-APP.onrender.com'
+  apiUrl: 'https://fintrace-backend-g1tu.onrender.com'
 };
