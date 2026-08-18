@@ -4,14 +4,15 @@ import {
   AccountInvestigation,
   InvestigationGraph
 } from '../models/investigation.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestigationService {
 
-  private readonly baseUrl =
-    'http://localhost:8080/api/investigations';
+  private readonly baseUrl =environment.apiUrl+
+    '/api/investigations';
 
   constructor(private http: HttpClient) {}
 
